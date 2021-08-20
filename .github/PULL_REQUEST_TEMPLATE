@@ -1,0 +1,11 @@
+## What has changed?
+
+## Why?
+
+## How has it been tested?
+
+## Checklist before merging
+- [ ] update the version number in `setup.cfg`
+- [ ] update CHANGELOG.md
+- [ ] update README.md
+- [ ] Run pre-commit on all files
