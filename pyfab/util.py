@@ -1,6 +1,6 @@
 import csv
 import io
-import os
+from typing import List
 
 
 def format_url(base_url: str, path: str) -> str:
@@ -26,7 +26,7 @@ def format_url(base_url: str, path: str) -> str:
     return base_url + path
 
 
-def csv_to_json(data: csv.DictReader) -> list:
+def csv_to_json(data: csv.DictReader) -> List:
     """
     might not need this, gotta test csv output from fab api
     """

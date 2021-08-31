@@ -1,7 +1,6 @@
 import json
 
 import requests
-from requests.adapters import HTTPAdapter
 
 from pyfab.util import format_url
 
