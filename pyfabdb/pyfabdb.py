@@ -1,11 +1,11 @@
-from pyfab.client import Client
+from pyfabdb.client import Client
 
 
-class PyFab(Client):
-    def __init__(self, url=None, heade=None):
-        super().__init__(url='https://api.fabdb.net', header={'Accept': 'application/json'})
+class PyFabdb(Client):
+    def __init__(self, url: str = 'https://api.fabdb.net', header: dict = {'Accept': 'application/json'}):
+        super().__init__(url=url, header=header)
 
-    def cards(self) -> dict:
+    def cards(self, page: int = 1, per_page: int = 25, keywords: str = '', pitch: str = '', cost: str = '', card_class: str = '', rarity: str = '', set: str = '') -> dict:
         ''' Get cards from fab API.
         :param page: When paginating through data sets, specifies the page.
             Integer.
@@ -17,14 +17,15 @@ class PyFab(Client):
             String. Valid values are: (1, 2, or 3)
         :params cost: Search for a card with a given cost.
             String. Valid values are: (1, 2, 3, or 4+)
-        :params class: Search for a card that matches the required hero class.
+        :params card_class: Search for a card that matches the required hero class.
            String. Valid values are: brute, guardian, mechanologist, ninja, ranger, runeblade, warrior, wizard.
         :params rarity: Search for a card that matches the specified rarity.
             String. Valid values are: C, R, S, T, L, F, P
         :params set: Search for cards from a given set.
             String. Valid values are: WTR, ARC, CRU, MON
         :return: A list of dictionaries with the cards' data.
-        :rtype: list[dict{}]
+        :rtype: dict{}
+
             Example Returned Data:
             {
                 "current_page":19,
@@ -46,7 +47,27 @@ class PyFab(Client):
                 "to":457
             }
         '''
-        return self.get(path='/cards')
+
+        payload = {}
+
+        if page:
+            payload['page'] = page
+        if per_page:
+            payload['per_page'] = per_page
+        if keywords:
+            payload['keywords'] = keywords
+        if pitch:
+            payload['pitch'] = pitch
+        if cost:
+            payload['cost'] = cost
+        if card_class:
+            payload['class'] = card_class
+        if rarity:
+            payload['rarity'] = rarity
+        if set:
+            payload['set'] = set
+
+        return self.get(path='/cards', params=payload)
 
     def get_card(self, id: str = 'absorb-in-aether-red') -> dict:
         ''' Get a card from fab API.
@@ -54,7 +75,11 @@ class PyFab(Client):
         :return: Returns a dictionary with the card's data.
         :rtype: dict
         '''
-        return self.get(path=f'/cards/{id}')
+        payload = {}
+        if id:
+            payload['id'] = id
 
-    def decks(self, slug: str = 'NmzrmMWV') -> dict:
+        return self.get(path=f'/cards/{id}', params=payload)
+
+    def decks(self, slug: str = 'eLxddlzb') -> dict:
         return self.get(path=f'/decks/{slug}')

@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from pyfab.util import format_url
+from pyfabdb.util import format_url
 
 
 class Client:
@@ -21,7 +21,7 @@ class Client:
     def __set_default_header(self) -> None:
         self.session.headers.update({'Accept': 'application/json'})
 
-    def _request(self, method: str, base_url: str, path: str, data: dict = {}, header: dict = {}):
+    def _request(self, method: str, base_url: str, path: str, data: dict = {}, header: dict = {}, params: dict = {}):
         if path is not None and base_url is not None:
             url = format_url(self.url, path)
         elif path is not None and base_url is None:
@@ -39,7 +39,7 @@ class Client:
         else:
             self.__set_default_header()
 
-        response = self.session.request(method=method, url=url, data=data, headers=self.session.headers)
+        response = self.session.request(method=method, url=url, data=data, headers=self.session.headers, params=params)
 
         try:
             response.raise_for_status()
@@ -60,17 +60,17 @@ class Client:
         else:
             return response.status_code
 
-    def get(self, base_url: str = '', path: str = '', data: dict = None, header: dict = None):
-        return self._request(method='GET', base_url=base_url, path=path, data=data, header=header)
+    def get(self, base_url: str = '', path: str = '', data: dict = {}, header: dict = {}, params: dict = {}):
+        return self._request(method='GET', base_url=base_url, path=path, data=data, header=header, params=params)
 
-    def post(self, base_url: str = '', path: str = '', data: dict = None, header: dict = None):
-        return self._request(method='POST', base_url=base_url, path=path, data=data, header=header)
+    def post(self, base_url: str = '', path: str = '', data: dict = {}, header: dict = {}, params: dict = {}):
+        return self._request(method='POST', base_url=base_url, path=path, data=data, header=header, params=params)
 
-    def delete(self, base_url: str = '', path: str = '', data: dict = None, header: dict = None):
-        return self._request(method='DELETE', base_url=base_url, path=path, data=data, header=header)
+    def delete(self, base_url: str = '', path: str = '', data: dict = {}, header: dict = {}, params: dict = {}):
+        return self._request(method='DELETE', base_url=base_url, path=path, data=data, header=header, params=params)
 
-    def patch(self, base_url: str = '', path: str = '', data: dict = None, header: dict = None):
-        return self._request(method='PATCH', base_url=base_url, path=path, data=data, header=header)
+    def patch(self, base_url: str = '', path: str = '', data: dict = {}, header: dict = {}, params: dict = {}):
+        return self._request(method='PATCH', base_url=base_url, path=path, data=data, header=header, params=params)
 
-    def put(self, base_url: str = '', path: str = '', data: dict = None, header: dict = None):
-        return self._request(method='PUT', base_url=base_url, path=path, data=data, header=header)
+    def put(self, base_url: str = '', path: str = '', data: dict = {}, header: dict = {}, params: dict = {}):
+        return self._request(method='PUT', base_url=base_url, path=path, data=data, header=header, params=params)
