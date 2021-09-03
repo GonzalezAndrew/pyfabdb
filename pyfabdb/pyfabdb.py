@@ -6,7 +6,7 @@ class PyFabdb(Client):
         super().__init__(url=url, header=header)
 
     def cards(self, page: int = 1, per_page: int = 25, keywords: str = '', pitch: str = '', cost: str = '', card_class: str = '', rarity: str = '', set: str = '') -> dict:
-        ''' Get cards from fab API.
+        ''' Get cards from fabdb API.
         :param page: When paginating through data sets, specifies the page.
             Integer.
         :param per_page: Specify the number of records per result set.
@@ -70,7 +70,7 @@ class PyFabdb(Client):
         return self.get(path='/cards', params=payload)
 
     def get_card(self, id: str = 'absorb-in-aether-red') -> dict:
-        ''' Get a card from fab API.
+        ''' Get a card from fabdb API.
         :params id: The identifier of the card.
         :return: Returns a dictionary with the card's data.
         :rtype: dict
@@ -82,4 +82,9 @@ class PyFabdb(Client):
         return self.get(path=f'/cards/{id}', params=payload)
 
     def decks(self, slug: str = 'eLxddlzb') -> dict:
+        ''' Get a deck from fabdb API.
+        :params slug: The slug of the deck.
+        :return: Returns a dictionary with the deck's data.
+        :rtype: dict
+        '''
         return self.get(path=f'/decks/{slug}')
