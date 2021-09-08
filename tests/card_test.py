@@ -21,6 +21,7 @@ def test_cards(fabdb):
     """ Test the cards function """
     cards = fabdb.cards()
     assert isinstance(cards, dict)
+    assert len(cards['data']) > 0
 
 
 def test_cards_by_pitch(fabdb):
@@ -28,14 +29,23 @@ def test_cards_by_pitch(fabdb):
     pitch_1 = fabdb.cards(pitch='1')
     assert isinstance(pitch_1, dict)
     assert len(pitch_1) > 0
+    for card in pitch_1['data']:
+        pitch = card['stats']['resource']
+        assert pitch == '1' or pitch == 1
 
     pitch_2 = fabdb.cards(pitch='2')
     assert isinstance(pitch_2, dict)
     assert len(pitch_2) > 0
+    for card in pitch_2['data']:
+        pitch = card['stats']['resource']
+        assert pitch == '2' or pitch == 2
 
     pitch_3 = fabdb.cards(pitch='3')
     assert isinstance(pitch_3, dict)
     assert len(pitch_3) > 0
+    for card in pitch_3['data']:
+        pitch = card['stats']['resource']
+        assert pitch == '3' or pitch == 3
 
     # pitch can only be 1, 2, or 3
     pitch_4 = fabdb.cards(pitch='4')

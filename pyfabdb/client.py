@@ -7,7 +7,7 @@ from pyfabdb.util import format_url
 
 class Client:
     """
-    The client class for communicating with the API.
+    The client class for communicating with an API.
     """
 
     def __init__(self, url: str = 'https://api.fabdb.net', header: dict = {'Accept': 'application/json'}):
