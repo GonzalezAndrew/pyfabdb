@@ -44,13 +44,13 @@ class Client:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            raise(e)
+            raise (e)
         except requests.exceptions.RequestException as e:
-            raise(e)
+            raise (e)
         except requests.exceptions.ConnectionError as e:
-            raise(e)
+            raise (e)
         except requests.exceptions.Timeout as e:
-            raise(e)
+            raise (e)
 
         if response.text != '':
             try:
