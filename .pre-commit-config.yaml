@@ -19,15 +19,15 @@ repos:
         args:
             - "--ignore=E501"
 -   repo: https://github.com/hhatto/autopep8
-    rev: v2.0.4
+    rev: v2.1.0
     hooks:
     -   id: autopep8
 -   repo: https://github.com/pre-commit/pre-commit
-    rev: v3.6.0
+    rev: v3.7.0
     hooks:
     -   id: validate_manifest
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.0
+    rev: v3.15.2
     hooks:
     -   id: pyupgrade
         args: [--py36-plus]
